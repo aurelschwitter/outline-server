@@ -19,7 +19,7 @@ ARG NODE_IMAGE
 FROM ${NODE_IMAGE} AS build
 
 # make for building third_party/prometheus and perl-utils for shasum.
-RUN apk add --no-cache --upgrade bash make perl-utils
+RUN apt install bash make #perl-utils
 WORKDIR /
 
 # Don't copy node_modules and other things not needed for install.
@@ -48,7 +48,7 @@ LABEL shadowbox.github.release="${GITHUB_RELEASE}"
 
 # We use curl to detect the server's public IP. We need to use the --date option in `date` to
 # safely grab the ip-to-country database
-RUN apk add --no-cache --upgrade coreutils curl
+RUN apt install coreutils curl
 
 COPY src/shadowbox/scripts scripts/
 COPY src/shadowbox/scripts/update_mmdb.sh /etc/periodic/weekly/update_mmdb

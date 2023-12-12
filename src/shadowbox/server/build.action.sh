@@ -22,17 +22,18 @@ webpack --config=src/shadowbox/webpack.config.js ${BUILD_ENV:+--mode="${BUILD_EN
 
 # Install third_party dependencies
 readonly OS="$([[ "$(uname)" == "Darwin" ]] && echo "macos" || echo "linux")"
-export ARCH=${ARCH:-x86_64}
+#export ARCH=${ARCH:-x86_64}
+export ARCH="armv7"
 readonly BIN_DIR="${OUT_DIR}/bin"
 mkdir -p "${BIN_DIR}"
 {
   cd "${ROOT_DIR}/third_party/prometheus"
-  make "bin/${OS}-${ARCH}/prometheus"
+  make "bin/${OS}-${ARCH}/prometheus" bin/linux-armv7/prometheus
   cp "bin/${OS}-${ARCH}/prometheus" "${BIN_DIR}/"
 }
 {
   cd "${ROOT_DIR}/third_party/outline-ss-server"
-  make "bin/${OS}-${ARCH}/outline-ss-server"
+  make "bin/${OS}-${ARCH}/outline-ss-server" bin/linux-armv7/outline-ss-server
   cp "bin/${OS}-${ARCH}/outline-ss-server" "${BIN_DIR}/"
 }
 

@@ -3,11 +3,11 @@ VERSION=2.37.1
 ifeq ($(ARCH),x86_64)
     APP_ARCH=amd64
 else
-    APP_ARCH=arm64
+    APP_ARCH=armv7
 endif
 
 .PHONY: all
-all: bin/linux-x86_64/prometheus bin/linux-arm64/prometheus bin/macos-x86_64/prometheus bin/macos-arm64/prometheus
+all: bin/linux-x86_64/prometheus bin/linux-arm64/prometheus bin/macos-x86_64/prometheus bin/macos-arm64/prometheus bin/linux-armv7/prometheus
 
 bin/linux-x86_64/prometheus: OS=linux
 bin/linux-x86_64/prometheus: SHA256=753f66437597cf52ada98c2f459aa8c03745475c249c9f2b40ac7b3919131ba6
@@ -20,6 +20,9 @@ bin/macos-x86_64/prometheus: SHA256=e03a43d98955ac3500f57353ea74b5df829074205f19
 
 bin/macos-arm64/prometheus: OS=darwin
 bin/macos-arm64/prometheus: SHA256=eb8a174c82a0fb6c84e81d9a73214318fb4a605115ad61505d7883d02e5a6f52
+
+bin/linux-armv7/prometheus: OS=linux
+bin/linux-armv7/prometheus: SHA256=3eaa01248879fb14524ea09ace1b4fabbbdc5ffc6b288bb101395681aa3c77f0
 
 bin/%/prometheus: TEMPFILE := $(shell mktemp)
 bin/%/prometheus:
